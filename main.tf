@@ -1,7 +1,8 @@
 data "aws_region" "current" {}
 
 module "ecr" {
-  source  = "git@github.com:kevcube/terraform-aws-ecs-codepipeline.git?ref=973e547"
+  source  = "cloudposse/ecr/aws"
+  version = "0.32.3"
   enabled = var.codepipeline_enabled
 
   attributes           = ["ecr"]
@@ -177,8 +178,7 @@ module "ecs_alb_service_task" {
 
 module "ecs_codepipeline" {
   enabled = var.codepipeline_enabled
-  source  = "cloudposse/ecs-codepipeline/aws"
-  version = "0.28.4"
+  source  = "git@github.com:kevcube/terraform-aws-ecs-codepipeline.git?ref=973e547"
 
   region                      = coalesce(var.region, data.aws_region.current.name)
   github_oauth_token          = var.github_oauth_token
