@@ -1,8 +1,8 @@
 data "aws_region" "current" {}
 
 module "ecr" {
-  source  = "cloudposse/ecr/aws"
-  version = "0.32.3"
+  source  = "git@github.com:kevcube/terraform-aws-ecs-codepipeline.git"
+  version = "be3242c"
   enabled = var.codepipeline_enabled
 
   attributes           = ["ecr"]
@@ -22,7 +22,7 @@ resource "aws_cloudwatch_log_group" "app" {
 
 module "alb_ingress" {
   source  = "cloudposse/alb-ingress/aws"
-  version = "0.24.1"
+  version = "0.24.2"
 
   vpc_id                           = var.vpc_id
   port                             = var.container_port
@@ -229,7 +229,7 @@ module "ecs_codepipeline" {
 module "ecs_cloudwatch_autoscaling" {
   enabled               = var.autoscaling_enabled
   source                = "cloudposse/ecs-cloudwatch-autoscaling/aws"
-  version               = "0.7.2"
+  version               = "0.7.3"
   name                  = var.name
   namespace             = var.namespace
   stage                 = var.stage
