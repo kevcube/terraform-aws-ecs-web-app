@@ -1,7 +1,7 @@
 data "aws_region" "current" {}
 
 module "ecr" {
-  source  = "git@github.com:kevcube/terraform-aws-ecs-codepipeline.git?ref=be3242c"
+  source  = "git@github.com:kevcube/terraform-aws-ecs-codepipeline.git?ref=973e547"
   enabled = var.codepipeline_enabled
 
   attributes           = ["ecr"]
